@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.env
+*.db
+backend/temp_uploads/
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Project specific
+*.mp3

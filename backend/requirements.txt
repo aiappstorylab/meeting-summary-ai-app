@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+sqlalchemy
+torch
+faster-whisper
+langchain
+langchain-openai
+notion-client
+mcp[fastmcp]
+aiofiles
+pydantic
+pydantic-settings
