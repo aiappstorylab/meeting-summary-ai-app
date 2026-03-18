@@ -47,6 +47,9 @@ async def upload_meeting(file: UploadFile = File(...), db: Session = Depends(get
     with open(temp_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
+    from datetime import datetime
+    upload_date = datetime.now().strftime("%Y-%m-%d")
+    
     try:
         # 2. STT Transformation
         raw_text = await stt_service.transcribe(temp_path)
@@ -58,7 +61,7 @@ async def upload_meeting(file: UploadFile = File(...), db: Session = Depends(get
         db.refresh(new_meeting)
         
         # 4. Extract Tasks via LLM
-        tasks = await agent_service.extract_tasks(raw_text)
+        tasks = await agent_service.extract_tasks(raw_text, upload_date)
         
         # 5. Automatically create Notion cards
         for task in tasks:

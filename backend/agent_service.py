@@ -31,10 +31,10 @@ class AgentService:
         
         self.chain = self.prompt | self.llm | self.parser
 
-    async def extract_tasks(self, meeting_text: str) -> List[dict]:
+    async def extract_tasks(self, meeting_text: str, reference_date: str) -> List[dict]:
         response = await self.chain.ainvoke({
             "meeting_text": meeting_text,
-            "format_instructions": self.parser.get_format_instructions()
+            "format_instructions": self.parser.get_format_instructions() + f"\n\n오늘 날짜(기준일)는 {reference_date}야. 이를 바탕으로 '내일', '다음 주' 등 상대적인 날짜를 정확한 YYYY-MM-DD 형식으로 계산해줘."
         })
         return response.get("tasks", [])
 
